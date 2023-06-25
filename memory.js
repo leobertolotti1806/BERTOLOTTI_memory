@@ -1,5 +1,6 @@
 let table = document.getElementById("table");
 let h2 = document.querySelector("header > h2");
+let pl = document.querySelectorAll(".pl");
 
 //vettore immagini
 let imgs = [
@@ -12,6 +13,7 @@ let imgs = [
     "tazza",
     "tazzina"
 ];
+
 imgs = imgs.concat(imgs);
 
 //vettore celle e carta precedente
@@ -20,9 +22,6 @@ let previous = {};
 
 //turno e scoperte per turno
 let turno = 0, scoperte = 0;
-
-//vettori giocatori
-let pl = document.querySelectorAll(".pl");
 
 //se è a false è perchè devi aspettare che le carte si girino
 let canIclick = true;
@@ -45,7 +44,7 @@ for (let i = 0; i < 4; i++) {
         cells.push({
             card: col,
             id: imgs[arrInd],
-            trovata: false, //numero giocatore
+            trovata: false,
         });
 
         col.addEventListener("click", function () {
@@ -71,21 +70,26 @@ for (let i = 0; i < 4; i++) {
                     pl[turno].appendChild(card);
 
                     if (!cells.some(c => !c.trovata)) {
-                        alert("Vince il giocatore " + turno);
-                        if (confirm("Volete rigiocare?")) {
-                            shuffleImgs();
+                        setTimeout(() => {
+                            alert("Vince il giocatore " + (turno + 1));
+                            if (confirm("Volete rigiocare?")) {
+                                shuffleImgs();
 
-                            for (const k in cells) {
-                                cells[k].trovata = false;
-                                cells[k].card.firstChild.firstChild.style.backgroundImage = "url(./img/" + imgs[k] + ".png)";
-                            }
+                                previous = {};
 
-                            pl[0].innerHTML = "";
-                            pl[1].innerHTML = "";
+                                for (const k in cells) {
+                                    cells[k].trovata = false;
+                                    cells[k].card.firstChild.className = "";
+                                    cells[k].card.firstChild.firstChild.style.backgroundImage = "url(./img/" + imgs[k] + ".png)";
+                                }
 
-                            turno = 0;
-                            scoperte = 0;
-                        } else close();
+                                pl[0].innerHTML = "";
+                                pl[1].innerHTML = "";
+
+                                turno = 0;
+                                scoperte = 0;
+                            } else close();
+                        }, 800);
                     }
                 } else {
                     //cambio turno
@@ -98,7 +102,8 @@ for (let i = 0; i < 4; i++) {
                     }, 800);
 
                     scoperte = 0;
-                    turno = turno == 1 ? 0 : 1
+                    turno ^= 1;
+
                     h2.textContent = "Turno giocatore " + (turno + 1);
                 }
             }
