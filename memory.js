@@ -1,5 +1,6 @@
 let table = document.getElementById("table");
 let h2 = document.querySelector("header > h2");
+
 //vettore immagini
 let imgs = [
     "gambero",
@@ -11,6 +12,7 @@ let imgs = [
     "tazza",
     "tazzina"
 ];
+imgs = imgs.concat(imgs);
 
 //vettore celle e carta precedente
 let cells = [];
@@ -31,7 +33,7 @@ for (let i = 0; i < 4; i++) {
     let row = document.createElement("div");
 
     for (let j = 0; j < 4; j++) {
-        let arrInd = i * 4 + j;
+        const arrInd = i * 4 + j;
 
         let col = document.createElement("div");
         col.className = "card";
@@ -46,10 +48,10 @@ for (let i = 0; i < 4; i++) {
             trovata: false, //numero giocatore
         });
 
-        col.addEventListener("click", () => {
-            if (!cells[arrInd].trovata && col.firstChild.className == "" && canIclick) {
+        col.addEventListener("click", function () {
+            if (!cells[arrInd].trovata && this.firstChild.className == "" && canIclick) {
 
-                col.firstChild.className = "scopri";
+                this.firstChild.className = "scopri";
                 scoperte++;
 
                 if (scoperte % 2 == 1) {
@@ -62,23 +64,42 @@ for (let i = 0; i < 4; i++) {
                     cells[arrInd].trovata = true;
                     cells[previous.ind].trovata = true;
                     cells[previous.ind].card.firstChild.className = "scopri";
-                    
+
                     let card = document.createElement("div");
                     card.innerHTML = "<img src='./img/" + imgs[arrInd] + ".png'>";
 
                     pl[turno].appendChild(card);
+
+                    if (!cells.some(c => !c.trovata)) {
+                        alert("Vince il giocatore " + turno);
+                        if (confirm("Volete rigiocare?")) {
+                            shuffleImgs();
+
+                            for (const k in cells) {
+                                cells[k].trovata = false;
+                                cells[k].card.firstChild.firstChild.style.backgroundImage = "url(./img/" + imgs[k] + ".png)";
+                            }
+
+                            pl[0].innerHTML = "";
+                            pl[1].innerHTML = "";
+
+                            turno = 0;
+                            scoperte = 0;
+                        } else close();
+                    }
                 } else {
+                    //cambio turno
                     canIclick = false;
 
                     setTimeout(() => {
                         canIclick = true;
-                        col.firstChild.className = "";
+                        this.firstChild.className = "";
                         cells[previous.ind].card.firstChild.className = "";
                     }, 800);
 
                     scoperte = 0;
                     turno = turno == 1 ? 0 : 1
-                    h2.textContent = "Turno giocatore " + (turno  + 1);
+                    h2.textContent = "Turno giocatore " + (turno + 1);
                 }
             }
         });
@@ -88,7 +109,6 @@ for (let i = 0; i < 4; i++) {
 }
 
 function shuffleImgs() {
-    imgs = imgs.concat(imgs);
     for (let i = imgs.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [imgs[i], imgs[j]] = [imgs[j], imgs[i]];
