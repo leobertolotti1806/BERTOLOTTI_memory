@@ -1,5 +1,5 @@
 let table = document.getElementById("table");
-let h1 = document.querySelector("main > h1");
+let h2 = document.querySelector("header > h2");
 //vettore immagini
 let imgs = [
     "gambero",
@@ -20,7 +20,7 @@ let previous = {};
 let turno = 0, scoperte = 0;
 
 //vettori giocatori
-let pl1 = [], pl2 = [];
+let pl = document.querySelectorAll(".pl");
 
 //se è a false è perchè devi aspettare che le carte si girino
 let canIclick = true;
@@ -49,7 +49,6 @@ for (let i = 0; i < 4; i++) {
         col.addEventListener("click", () => {
             if (!cells[arrInd].trovata && col.firstChild.className == "" && canIclick) {
 
-
                 col.firstChild.className = "scopri";
                 scoperte++;
 
@@ -63,6 +62,11 @@ for (let i = 0; i < 4; i++) {
                     cells[arrInd].trovata = true;
                     cells[previous.ind].trovata = true;
                     cells[previous.ind].card.firstChild.className = "scopri";
+                    
+                    let card = document.createElement("div");
+                    card.innerHTML = "<img src='./img/" + imgs[arrInd] + ".png'>";
+
+                    pl[turno].appendChild(card);
                 } else {
                     canIclick = false;
 
@@ -73,8 +77,8 @@ for (let i = 0; i < 4; i++) {
                     }, 800);
 
                     scoperte = 0;
-                    turno++;
-                    h1.textContent = "Turno giocatore " + (turno % 2 + 1);
+                    turno = turno == 1 ? 0 : 1
+                    h2.textContent = "Turno giocatore " + (turno  + 1);
                 }
             }
         });
