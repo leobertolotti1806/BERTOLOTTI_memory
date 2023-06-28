@@ -1,0 +1,134 @@
+main{
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px;
+    box-sizing: border-box;
+    gap: 10vh;
+}
+
+::selection{
+    background-color: #ef8e38;
+    color: black;
+}
+
+main > b{
+    font-size: 4.5vh;
+    text-align: center;
+}
+
+form{
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    padding-top: 12px;
+    box-sizing: border-box;
+}
+
+input , button{
+    color: #FFE6D8;
+    font-weight: bold;
+    outline: none;
+}
+
+button{
+    cursor: pointer;
+}
+
+input.pl:hover, input.pl:focus-visible , input.pl:focus, button:hover{
+    transform: scale(102%);
+    border-color: #ef8e38;
+}
+
+input.pl.noFocus:hover, input.pl.noFocus:focus-visible, input.pl.noFocus:focus{
+    transform: scale(100%);
+    border-color: #533a26;
+}
+
+input.pl.noFocus::selection{
+    background-color: transparent;
+    color: #FFE6D8;
+}
+
+form > div{
+    flex-direction: column;
+    height: 70%;
+    width: 100%;
+}
+
+form > div > div{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+form > div > div > b{
+    font-size: 20px;
+}
+
+.pl{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 20px;
+    width: 100%;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+form > div > div:last-child{
+    flex-grow: 3;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+label {
+    width: 80px;
+    height: 36px;
+    border-radius: 34px;
+    border: 3px #533a26 solid;
+    overflow: hidden;
+}
+
+label > input {
+   display: none;
+}
+
+label > span {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #b04e34;
+    transition: background-color 0.4s;
+    cursor: pointer;
+}
+
+label > span:before {
+    content: "no";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    transform: translateX(-75%);
+    transition: transform 0.4s;
+}
+
+input:checked + span::before{
+    content: "sì";
+}
+
+input:focus + span , input:checked + span{
+    background-color: #2196F3;
+}
+
+input:checked + span:before {
+    transform: translateX(75%);
+}
