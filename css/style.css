@@ -14,13 +14,20 @@ main{
 main > b{
     font-size: 4.5vh;
     text-align: center;
+    animation: pulse 1.5s alternate infinite linear;
+}
+
+@keyframes pulse {
+    0%  {text-shadow: 0 0 0.4vh aliceblue, 0 0 0.4vh aliceblue;
+    transform: scale(115%);}
+    100%{text-shadow: 0 0 0.4vh transparent, 0 0 0.4vh transparent;
+        transform: scale(95%);}
 }
 
 form{
     align-items: center;
     justify-content: center;
-    padding: 30px;
-    padding-top: 12px;
+    padding: 3vh;
     box-sizing: border-box;
 }
 
@@ -60,7 +67,7 @@ form > div > div{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-start;
 }
 
 form > div > div > b{
@@ -75,60 +82,4 @@ form > div > div > b{
     font-size: 20px;
     width: 100%;
     transition: border-color 0.2s, transform 0.2s;
-}
-
-form > div > div:last-child{
-    flex-grow: 3;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-label {
-    width: 80px;
-    height: 36px;
-    border-radius: 34px;
-    border: 3px #533a26 solid;
-    overflow: hidden;
-}
-
-label > input {
-   display: none;
-}
-
-label > span {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    background-color: #b04e34;
-    transition: background-color 0.4s;
-    cursor: pointer;
-}
-
-label > span:before {
-    content: "no";
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 28px;
-    width: 28px;
-    border-radius: 50%;
-    background-color: #ffffff;
-    transform: translateX(-75%);
-    transition: transform 0.4s;
-}
-
-input:checked + span::before{
-    content: "sì";
-}
-
-input:focus + span , input:checked + span{
-    background-color: #2196F3;
-}
-
-input:checked + span:before {
-    transform: translateX(75%);
 }

@@ -13,6 +13,9 @@ body {
     background-image: linear-gradient(to right, #108dc7, #ef8e38);
 }
 
+footer > b {
+    font-size: 2vh;
+}
 
 header , footer {
     display: flex;
@@ -20,6 +23,69 @@ header , footer {
     justify-content: center;
     height: 5.5vh;
     background-color: #9DADBC;
+}
+
+header {
+    height: 8vh;
+}
+
+header > div{
+    display: flex;
+    height: 65%;
+    padding: 0px 20px;
+    width: 450px;
+    gap: 45px;
+    border-radius: 30px;
+    border: 0.5vh rgb(83, 58, 38) solid;
+}
+
+header > div {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+header > div > span{
+    position: absolute;
+    width: 200%;
+    height: 1100%;
+    background-image: linear-gradient(to right, #ef8e38, #ef8e38, #ef8e38,
+        #e16470, #a25c90, #565883, #2f4858, #2f4858, #2f4858);
+    transition: transform 0.5s;
+}
+
+header > div > div{
+    z-index: 1;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    color: aliceblue;
+    font-size: 1.8vh;
+    transition: opacity 1s, font-size 1s;
+    opacity: 0.2;
+    animation: none;
+}
+
+.turno2 > span {
+    transform: rotate(180deg);
+}
+
+.turno1 > div:last-child , .turno2 > div:first-child{
+    font-size: 1.8vh;
+}
+
+.turno2 > div:last-child , .turno1 > div:first-child{
+    opacity: 1;
+    animation: pulse 0.9s alternate infinite;
+}
+
+@keyframes pulse {
+    0%  {text-shadow: 0 0 0.4vh aliceblue, 0 0 0.4vh aliceblue;
+    font-size: 3vh;}
+    100%{text-shadow: 0 0 0.4vh transparent, 0 0 0.4vh transparent;
+        font-size: 2.5vh;}
 }
 
 main{
@@ -47,6 +113,9 @@ main{
 }
 
 #player > div > b{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 22px;
 }
 
@@ -87,7 +156,6 @@ main{
 }
 
 .pl > div > img{
-    
     cursor: default;
 }
 
@@ -204,6 +272,16 @@ main{
     #player > div{
         flex-direction: row;
         justify-content: center;
+        padding: 1vh;
+        box-sizing: border-box;
+    }
+
+    #player > div > b {
+        width: 30%;
+    }
+
+    .pl{
+        width: 70%;
     }
 }
 
@@ -213,19 +291,24 @@ main{
     }
 
     #player > div > b{
-        font-size: 18px;
+        font-size: 17px;
     }
 
-    .pl{
-        width: 50%;
-        min-height: 60px;
-        border-width: 4px;
-        border-radius: 20px;
+    header > div{
+        width: 80%;
+    }
+    
+    header > div > div{
+        font-size: 2.3vh !important;
     }
 }
 
 @media screen and (max-width:370px) {
     #table{
         transform: scale(65%);
+    }
+
+    header > div {
+        transform: scale(80%);
     }
 }
