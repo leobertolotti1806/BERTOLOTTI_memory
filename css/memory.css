@@ -122,9 +122,9 @@ main{
 #table{
     display: flex;
     flex-direction: column;
-    border: 8px rgb(83, 58, 38) solid;
     width: 500px;
     height: 500px;
+    border: 8px rgb(83, 58, 38) solid;
     background-color: rgba(149, 104, 70, 0.75);
     border-radius: 30px;
     box-shadow: 6px 6px 10px black;
@@ -207,6 +207,60 @@ main{
     background-size: cover;
     transform: rotateY(180deg);
     backface-visibility: hidden;
+}
+
+#menu{
+    position: absolute;
+    z-index: 10;
+    top: -50vh;
+    left: calc(50vw - 17.5vh);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 35vh;
+    height: 20vh;
+    border: 0.8vh rgb(83, 58, 38) solid;
+    border-radius: 3vh;
+    box-shadow: 8px 8px 10px black;
+    background-image: linear-gradient(to right, #ef8e38,#e16470, #a25c90, #565883);
+    transition: top 1s;
+}
+
+#menu > b{
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    font-size: 3vh;
+}
+
+#menu > div {
+    display: flex;
+    justify-content: space-evenly;
+    height: 35%;
+    width: 100%;
+}
+
+#menu > div > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1vh;
+    width: 40%;
+    height: 4vh;
+    border: 0.5vh rgb(83, 58, 38) solid;
+    border-radius: 2vh;
+    font-size: 2vh;
+    font-family: "regular";
+    box-shadow: 6px 6px 10px black;
+    background-color: #b04e34;
+    cursor: pointer;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+#menu > div > button:hover{
+    transform: scale(110%);
+    border-color: #ef8e38;
 }
 
 @media screen and (max-height: 700px) {

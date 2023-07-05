@@ -1,6 +1,7 @@
 let table = document.getElementById("table");
 let headerName = document.querySelectorAll("header > div > div");
 let pl = document.querySelectorAll(".pl");
+let menu = document.getElementById("menu");
 
 //vettore immagini
 let imgs = [
@@ -79,25 +80,42 @@ for (let i = 0; i < 4; i++) {
 
                     if (!cells.some(c => !c.trovata)) {
                         setTimeout(() => {
-                            alert("Vince il giocatore " + (turno + 1));
-                            if (confirm("Volete rigiocare?")) {
-                                shuffleImgs();
-    
-                                previous = {};
-    
-                                for (const k in cells) {
-                                    cells[k].trovata = false;
-                                    cells[k].card.firstChild.className = "";
-                                    cells[k].card.firstChild.firstChild.style.backgroundImage = "url(./img/" + imgs[k] + ".png)";
-                                    cells[k].id = imgs[k];
+                            document.addEventListener("click", (e) => {
+                                if (!menu.contains(e.target))
+                                    e.preventDefault();
+                            });
+
+                            menu.querySelector("b").textContent = "Ha vinto " + (turno == 0 ? formData.pl1 : formData.pl2) + "!";
+
+                            menu.style.top = "8vh";
+
+                            menu.querySelector("#play").onclick = () => {
+                                if (confirm("Volete rigiocare?")) {
+                                    menu.style.top = "";
+
+                                    headerName[0].parentElement.className = "turno1";
+
+                                    shuffleImgs();
+
+                                    previous = {};
+
+                                    for (const k in cells) {
+                                        cells[k].trovata = false;
+                                        cells[k].card.firstChild.className = "";
+                                        cells[k].card.firstChild.firstChild.style.backgroundImage = "url(./img/" + imgs[k] + ".png)";
+                                        cells[k].id = imgs[k];
+                                    }
+
+                                    pl[0].innerHTML = "";
+                                    pl[1].innerHTML = "";
+
+                                    turno = 0;
+                                    scoperte = 0;
                                 }
-    
-                                pl[0].innerHTML = "";
-                                pl[1].innerHTML = "";
-    
-                                turno = 0;
-                                scoperte = 0;
-                            } else close(); 
+                            };
+                            
+                            menu.querySelector("#close").onclick = () => confirm("Volete chiudere?") && close();
+
                         }, 500);
                     }
                 } else {
