@@ -44,7 +44,6 @@ for (let i = 0; i < 4; i++) {
         let col = document.createElement("div");
         col.className = "card";
         col.innerHTML = `<div><div></div></div>`;
-        //col.firstChild.innerHTML += imgs[arrInd];
         col.firstChild.firstChild.style.backgroundImage = "url(./img/" + imgs[arrInd] + ".png)";
 
         row.appendChild(col);
@@ -114,7 +113,12 @@ for (let i = 0; i < 4; i++) {
                                 }
                             };
                             
-                            menu.querySelector("#close").onclick = () => confirm("Volete chiudere?") && close();
+                            menu.querySelector("#close").onclick = () => {
+                                if (confirm("Volete chiudere?")) {
+                                    localStorage.removeItem("memory");
+                                    close();
+                                }
+                            };
 
                         }, 500);
                     }
