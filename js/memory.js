@@ -34,7 +34,6 @@ let formData = JSON.parse(localStorage.memory);
 headerName[0].textContent = formData.pl1;
 headerName[1].textContent = formData.pl2;
 
-
 for (let i = 0; i < 4; i++) {
     let row = document.createElement("div");
 
@@ -78,18 +77,17 @@ for (let i = 0; i < 4; i++) {
                     pl[turno].appendChild(card);
 
                     if (!cells.some(c => !c.trovata)) {
-                        setTimeout(() => {
-                            document.addEventListener("click", (e) => {
-                                if (!menu.contains(e.target))
-                                    e.preventDefault();
-                            });
+                        canIclick = false;
 
+                        setTimeout(() => {
                             menu.querySelector("b").textContent = "Ha vinto " + (turno == 0 ? formData.pl1 : formData.pl2) + "!";
 
                             menu.style.top = "8vh";
 
                             menu.querySelector("#play").onclick = () => {
                                 if (confirm("Volete rigiocare?")) {
+                                    canIclick = true;
+                                    
                                     menu.style.top = "";
 
                                     headerName[0].parentElement.className = "turno1";
