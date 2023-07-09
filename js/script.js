@@ -1,6 +1,5 @@
 let pl1 = document.getElementById("pl1");
 let pl2 = document.getElementById("pl2");
-let precPl2Value = "";
 
 document.getElementById("table").onsubmit = (e) => {
     if (pl1.value.length > 10) {
@@ -14,11 +13,5 @@ document.getElementById("table").onsubmit = (e) => {
     } else if (pl1.value == pl2.value) {
         e.preventDefault();
         alert("Inserite nomi diversi!");
-
-    } else {
-        localStorage.memory = JSON.stringify({
-            pl1: pl1.value,
-            pl2: pl2.value,
-        });
     }
 }

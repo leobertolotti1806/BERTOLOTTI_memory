@@ -12,6 +12,7 @@ main{
 }
 
 main > b{
+    width: 90%;
     font-size: 4.5vh;
     text-align: center;
     animation: pulse 1.5s alternate infinite linear;

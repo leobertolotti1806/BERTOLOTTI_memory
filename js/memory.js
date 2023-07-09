@@ -29,10 +29,11 @@ let canIclick = true;
 
 shuffleImgs();
 
-let formData = JSON.parse(localStorage.memory);
+let param = new URLSearchParams(window.location.search);
+let plName = [param.get("pl1"), param.get("pl2")];
 
-headerName[0].textContent = formData.pl1;
-headerName[1].textContent = formData.pl2;
+headerName[1].textContent = plName[0];
+headerName[0].textContent = plName[1];
 
 for (let i = 0; i < 4; i++) {
     let row = document.createElement("div");
@@ -80,7 +81,7 @@ for (let i = 0; i < 4; i++) {
                         canIclick = false;
 
                         setTimeout(() => {
-                            menu.querySelector("b").textContent = "Ha vinto " + (turno == 0 ? formData.pl1 : formData.pl2) + "!";
+                            menu.querySelector("b").textContent = "Ha vinto " + plName[turno] + "!";
 
                             menu.style.top = "8vh";
 
@@ -112,10 +113,8 @@ for (let i = 0; i < 4; i++) {
                             };
                             
                             menu.querySelector("#close").onclick = () => {
-                                if (confirm("Volete chiudere?")) {
-                                    localStorage.removeItem("memory");
+                                if (confirm("Volete chiudere?"))
                                     close();
-                                }
                             };
 
                         }, 500);
