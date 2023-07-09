@@ -80,44 +80,41 @@ for (let i = 0; i < 4; i++) {
                     if (!cells.some(c => !c.trovata)) {
                         canIclick = false;
 
-                        setTimeout(() => {
-                            menu.querySelector("b").textContent = "Ha vinto " + plName[turno] + "!";
 
-                            menu.style.top = "8vh";
+                        menu.querySelector("b").textContent = "Ha vinto " + plName[turno] + "!";
 
-                            menu.querySelector("#play").onclick = () => {
-                                if (confirm("Volete rigiocare?")) {
-                                    canIclick = true;
-                                    
-                                    menu.style.top = "";
+                        menu.style.top = "8vh";
 
-                                    headerName[0].parentElement.className = "turno1";
+                        menu.querySelector("#play").onclick = () => {
+                            if (confirm("Volete rigiocare?")) {
+                                canIclick = true;
 
-                                    shuffleImgs();
+                                menu.style.top = "";
 
-                                    previous = {};
+                                shuffleImgs();
 
-                                    for (const k in cells) {
-                                        cells[k].trovata = false;
-                                        cells[k].card.firstChild.className = "";
-                                        cells[k].card.firstChild.firstChild.style.backgroundImage = "url(./img/" + imgs[k] + ".png)";
-                                        cells[k].id = imgs[k];
-                                    }
+                                previous = {};
 
-                                    pl[0].innerHTML = "";
-                                    pl[1].innerHTML = "";
-
-                                    turno = 0;
-                                    scoperte = 0;
+                                for (const k in cells) {
+                                    cells[k].trovata = false;
+                                    cells[k].card.firstChild.className = "";
+                                    cells[k].card.firstChild.firstChild.style.backgroundImage = "url(./img/" + imgs[k] + ".png)";
+                                    cells[k].id = imgs[k];
                                 }
-                            };
-                            
-                            menu.querySelector("#close").onclick = () => {
-                                if (confirm("Volete chiudere?"))
-                                    close();
-                            };
 
-                        }, 500);
+                                pl[0].innerHTML = "";
+                                pl[1].innerHTML = "";
+
+                                turno ^= 1;
+                                scoperte = 0;
+                            }
+                        };
+
+                        menu.querySelector("#close").onclick = () => {
+                            if (confirm("Volete chiudere?"))
+                                close();
+                        };
+
                     }
                 } else {
                     //cambio turno
